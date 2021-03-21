@@ -6,7 +6,7 @@ import com.epam.engx.cleancode.naming.thirdpartyjar.Order;
 public class TrueDeliveryServiceStub implements DeliveryService {
 
     @Override
-    public boolean isDeliverable(Order o) {
+    public boolean isDelivery(Order o) {
         return true;
     }
 }

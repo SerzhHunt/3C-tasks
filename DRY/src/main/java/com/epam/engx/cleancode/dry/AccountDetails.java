@@ -45,5 +45,4 @@ public class AccountDetails implements Account {
     public void setAge(int age) {
         this.age = age;
     }
-
 }

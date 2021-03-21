@@ -1,31 +1,27 @@
 package com.epam.engx.cleancode.naming.delivery;
 
-import com.epam.engx.cleancode.naming.IOrderService;
-import com.epam.engx.cleancode.naming.task1.thirdpartyjar.*;
+import com.epam.engx.cleancode.naming.OrderService;
 import com.epam.engx.cleancode.naming.thirdpartyjar.*;
 
-import java.util.List;
+public class DeliveryOrderService implements OrderService {
 
-public class DeliveryOrderService implements IOrderService {
+    private DeliveryService deliveryService;
+    private OrderFulfilmentService orderService;
 
-    private DeliveryService mDeliveryService;
-
-    private OrderFulfilmentService mOrderFulfilmentService;
-
-    public void submitOrder(Order pOrder) {
-        if (mDeliveryService.isDeliverable(pOrder)) {
-            List<Product> products = pOrder.getProducts();
-            mOrderFulfilmentService.fulfilProducts(products);
+    @Override
+    public void submitOrder(Order order) {
+        if (deliveryService.isDelivery(order)) {
+            orderService.fulfilProducts(order.getProducts());
         } else {
-            throw new NotDeliverableOrderException();
+            throw new DeliveryOrderNotFoundException();
         }
     }
 
-    public void setDeliveryService(DeliveryService pDeliveryService) {
-        this.mDeliveryService = pDeliveryService;
+    public void setDeliveryService(DeliveryService deliveryService) {
+        this.deliveryService = deliveryService;
     }
 
-    public void setOrderFulfilmentService(OrderFulfilmentService pOrderFulfilmentService) {
-        this.mOrderFulfilmentService = pOrderFulfilmentService;
+    public void setOrderService(OrderFulfilmentService orderService) {
+        this.orderService = orderService;
     }
 }
