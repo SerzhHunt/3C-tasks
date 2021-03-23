@@ -30,10 +30,8 @@ public class InterestCalculator implements Profitable {
     }
 
     private int durationBetweenDatesInYears(Date from, Date to) {
-        Calendar startCalendar = new GregorianCalendar();
-        startCalendar.setTime(from);
-        Calendar endCalendar = new GregorianCalendar();
-        endCalendar.setTime(to);
+        Calendar startCalendar = getCalendar(from);
+        Calendar endCalendar = getCalendar(to);
 
         return calculateDiffYears(startCalendar, endCalendar);
     }
@@ -58,20 +56,24 @@ public class InterestCalculator implements Profitable {
     }
 
     private int durationSinceStartDateInYears(Date startDate) {
-        Calendar startCalendar = new GregorianCalendar();
-        startCalendar.setTime(startDate);
-        Calendar endCalendar = new GregorianCalendar();
-        endCalendar.setTime(new Date());
+        Calendar startCalendar = getCalendar(startDate);
+        Calendar endCalendar = getCalendar(new Date());
 
         return calculateDiffYears(startCalendar, endCalendar);
+    }
+
+    private Calendar getCalendar(Date date) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        return calendar;
     }
 
     private int calculateDiffYears(Calendar startCalendar, Calendar endCalendar) {
         int diffYear = endCalendar.get(Calendar.YEAR) - startCalendar.get(Calendar.YEAR);
 
-        int i = endCalendar.get(Calendar.DAY_OF_YEAR) + LEAP_YEAR_SHIFT;
-        int i1 = startCalendar.get(Calendar.DAY_OF_YEAR);
+        int startDate = startCalendar.get(Calendar.DAY_OF_YEAR);
+        int endDate = endCalendar.get(Calendar.DAY_OF_YEAR) + LEAP_YEAR_SHIFT;
 
-        return i < i1 ? diffYear - 1 : diffYear;
+        return endDate < startDate ? diffYear - 1 : diffYear;
     }
 }

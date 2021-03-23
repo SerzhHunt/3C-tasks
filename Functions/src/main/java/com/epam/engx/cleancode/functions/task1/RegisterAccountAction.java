@@ -9,28 +9,39 @@ import java.util.List;
 import static com.epam.engx.cleancode.functions.task1.thirdpartyjar.CheckStatus.OK;
 
 public class RegisterAccountAction {
-    private static final int MIN_LENGTH_ACCOUNT_NAME = 5;
-    private static final int MIN_LENGTH_ACCOUNT_PASSWORD = 8;
+    private static final int MIN_LENGTH_NAME = 5;
+    private static final int MIN_LENGTH_PASSWORD = 8;
 
     private PasswordChecker passwordChecker;
     private AccountManager accountManager;
 
     public void register(Account account) {
-        accountValidation(account);
+        getAccountValidation(account);
         accountBuilder(account);
     }
 
-    private void accountValidation(Account account) {
-        if (account.getName().length() <= MIN_LENGTH_ACCOUNT_NAME) {
+    private void getAccountValidation(Account account) {
+        checkLoginAccount(account);
+        checkAccountPassword(checkLengthPassword(account));
+    }
+
+    private void checkLoginAccount(Account account) {
+        if (account.getName().length() <= MIN_LENGTH_NAME) {
             throw new WrongAccountNameException();
         }
-        String password = account.getPassword();
-        if (password.length() <= MIN_LENGTH_ACCOUNT_PASSWORD) {
-            throw new TooShortPasswordException();
-        }
+    }
+
+    private void checkAccountPassword(String password) {
         if (passwordChecker.validate(password) != OK) {
             throw new WrongPasswordException();
         }
+    }
+
+    private String checkLengthPassword(Account account) {
+        if (account.getPassword().length() <= MIN_LENGTH_PASSWORD) {
+            throw new TooShortPasswordException();
+        }
+        return account.getPassword();
     }
 
     private void accountBuilder(Account account) {
