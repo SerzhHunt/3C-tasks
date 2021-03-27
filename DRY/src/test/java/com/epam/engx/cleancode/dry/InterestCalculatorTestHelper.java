@@ -9,12 +9,8 @@ import java.util.Date;
 public class InterestCalculatorTestHelper {
 
     public static Account makeAccountDetails(double balance, int age, int startedYearsAgo) {
-        AccountDetails accountDetails = new AccountDetails();
-        accountDetails.setBalance(new BigDecimal(balance));
-        accountDetails.setAge(age);
-        accountDetails.setBirth(getCurrentDateMinusYears(age));
-        accountDetails.setStartDate(getCurrentDateMinusYears(startedYearsAgo));
-        return accountDetails;
+        return new AccountDetails(getCurrentDateMinusYears(age),age,
+                BigDecimal.valueOf(balance),getCurrentDateMinusYears(startedYearsAgo));
     }
 
     private static Date getCurrentDateMinusYears(int years) {

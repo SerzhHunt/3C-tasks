@@ -9,24 +9,24 @@ import java.util.List;
 import static com.epam.engx.cleancode.functions.task1.thirdpartyjar.CheckStatus.OK;
 
 public class RegisterAccountAction {
-    private static final int MIN_LENGTH_NAME = 5;
+    private static final int NAME_MIN_LENGTH = 5;
     private static final int MIN_LENGTH_PASSWORD = 8;
 
     private PasswordChecker passwordChecker;
     private AccountManager accountManager;
 
     public void register(Account account) {
-        getAccountValidation(account);
+        validateAccount(account);
         accountBuilder(account);
     }
 
-    private void getAccountValidation(Account account) {
+    private void validateAccount(Account account) {
         checkLoginAccount(account);
         checkAccountPassword(checkLengthPassword(account));
     }
 
     private void checkLoginAccount(Account account) {
-        if (account.getName().length() <= MIN_LENGTH_NAME) {
+        if (account.getName().length() <= NAME_MIN_LENGTH) {
             throw new WrongAccountNameException();
         }
     }
