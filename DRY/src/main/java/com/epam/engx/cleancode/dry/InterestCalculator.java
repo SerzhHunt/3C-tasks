@@ -24,7 +24,7 @@ public class InterestCalculator implements Profitable {
     }
 
     private boolean isAccountStartedAfterBonusAge(AccountDetails accountDetails) {
-        return getDifferenceInYears(accountDetails.getBirth(),accountDetails.getStartDate()) > BONUS_AGE;
+        return getDifferenceInYears(accountDetails.getBirth(), accountDetails.getStartDate()) > BONUS_AGE;
     }
 
     private int getDifferenceInYears(Date startDate, Date endDate) {

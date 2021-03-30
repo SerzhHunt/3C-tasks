@@ -1,6 +1,7 @@
 package com.epam.engx.cleancode.dry;
 
 import com.epam.engx.cleancode.dry.thirdpartyjar.Account;
+import org.joda.time.Period;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -22,6 +23,7 @@ public class AccountDetails implements Account {
     public Date getBirth() {
         return birth;
     }
+
     @Override
     public Date getStartDate() {
         return startDate;
@@ -38,6 +40,6 @@ public class AccountDetails implements Account {
     }
 
     public int getAge() {
-        return age;       // should depend on current time
+        return new Period(birth.getTime(), new Date().getTime()).getYears();
     }
 }
