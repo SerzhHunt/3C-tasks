@@ -1,6 +1,6 @@
 package com.epam.engx.cleancode.naming.delivery;
 
-import com.epam.engx.cleancode.naming.thirdpartyjar.NotDeliverableOrderException;
+import com.epam.engx.cleancode.naming.thirdpartyjar.DeliveryOrderNotFoundException;
 import org.junit.Test;
 
 public class DeliveryOrderServiceTest {
@@ -10,13 +10,13 @@ public class DeliveryOrderServiceTest {
     @Test
     public void shouldDeliverProducts() {
         OrderFulfilmentServiceMock fulfilmentServiceMock = new OrderFulfilmentServiceMock();
-        deliveryOrderService.setOrderFulfilmentService(fulfilmentServiceMock);
+        deliveryOrderService.setOrderService(fulfilmentServiceMock);
         deliveryOrderService.setDeliveryService(new TrueDeliveryServiceStub());
         deliveryOrderService.submitOrder(new OrderStub("product-1"));
         fulfilmentServiceMock.assertFirstProductName("product-1");
     }
 
-    @Test (expected = NotDeliverableOrderException.class)
+    @Test (expected = DeliveryOrderNotFoundException.class)
     public void shouldNotDeliverProducts() {
         deliveryOrderService.setDeliveryService(new FalseDeliveryServiceStub());
         deliveryOrderService.submitOrder(new OrderStub("product-1"));

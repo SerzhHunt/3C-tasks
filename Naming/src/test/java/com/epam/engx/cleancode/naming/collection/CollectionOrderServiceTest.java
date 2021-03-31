@@ -2,7 +2,6 @@ package com.epam.engx.cleancode.naming.collection;
 
 import com.epam.engx.cleancode.naming.thirdpartyjar.Message;
 import com.epam.engx.cleancode.naming.thirdpartyjar.Submitable;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -26,7 +25,7 @@ public class CollectionOrderServiceTest {
         helper.submit(collectOrderService);
 
         assertEquals(INFO_LEVEL, notificationManagerMock.level);
-        Assert.assertEquals(Message.READY_FOR_COLLECT, notificationManagerMock.message);
+        assertEquals(Message.READY_FOR_COLLECT, notificationManagerMock.message);
     }
 
     @Test
@@ -37,7 +36,7 @@ public class CollectionOrderServiceTest {
         helper.submit(collectOrderService);
 
         assertEquals(CRITICAL_LEVEL, notificationManagerMock.level);
-        Assert.assertEquals(Message.IMPOSSIBLE_TO_COLLECT, notificationManagerMock.message);
+        assertEquals(Message.IMPOSSIBLE_TO_COLLECT, notificationManagerMock.message);
     }
 
 }
